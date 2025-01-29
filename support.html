@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Rural Banking Cloud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+        }
+        .faq-section{
+            width: 40%;
+        }
+        .support-form {
+            width: 40%;
+        }
+        .faq-section, .contact-info, .support-form {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 10px auto;
+            padding: 20px;
+            max-width: 800px;
+        }
+        .faq-section h2, .contact-info h2, .support-form h2 {
+            text-align: center;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-item h3 {
+            margin: 0;
+        }
+        .support-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .support-form input, .support-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .support-form button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .support-form button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rural Banking Cloud</h1>
+        <p>Customer Support</p>
+    </header>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="loans.html">Loans</a>
+        <a href="support.html">Support</a>
+    </nav>
+    
+    <div class="container">
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How can I reset my password?</h3>
+                <p>To reset your password, go to the login page and click on the "Forgot Password" link. Follow the instructions to reset your password.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I check my account balance?</h3>
+                <p>You can check your account balance by logging into your account and navigating to the "Dashboard" section.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What should I do if I notice unauthorized transactions?</h3>
+                <p>If you notice any unauthorized transactions, please contact our support team immediately at <a href="mailto:support@ruralbankingcloud.com">support@ruralbankingcloud.com</a>.</p>
+            </div>
+        </section>
+
+        <section class="contact-info">
+            <h2>Contact Information</h2>
+            <p>Email: <a href="mailto:support@ruralbankingcloud.com">support@ruralbankingcloud.com</a></p>
+            <p>Phone: 1234567890</p>
+            <p>Address: Ghatkesar</p>
+        </section>
+
+        <section class="support-form">
+            <h2>Submit a Support Request</h2>
+            <form action="support_process.html" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rural Banking Cloud. All rights reserved.</p>
+    </footer>
+</body>
+</html>

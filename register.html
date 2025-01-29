@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Rural Banking Cloud</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 20px;
+            position: relative;
+        }
+        .register-form {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 10px auto;
+            padding: 20px;
+            max-width: 500px;
+        }
+        .register-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .register-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .register-form button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .register-form button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .alert-box {
+            position: absolute;
+            width: 300px;
+            padding: 20px;
+            background-color: #26ff00;
+            color: rgb(0, 0, 0);
+            border-radius: 5px;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+            right: 5%;
+            top: 5%;
+            font-weight: bolder;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .close-alert {
+            float: right;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        
+        .close-alert:hover {
+            color: #ddd;
+        }
+        .loader {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            right: 0;
+            height: 10px;
+            background-color: #029f27;
+            animation: remove 5s linear;
+        }
+        @keyframes remove {
+            0% {
+                width: 100%;
+            }
+            100% {
+                width: 0%;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Register</h1>
+        <p>Create your account to start banking with us</p>
+    </header>
+
+    <nav>
+        <a href="htmlb.html">Home</a>
+        <a href="serviceb.html">Services</a>
+        <a href="register.html">Register</a>
+        <a href="aboutb.html">About Us</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <div class="register-form">
+            <h2>Create Account</h2>
+            <form id="registerForm" method="post" onsubmit="handleFormSubmit(event)">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <button id="signupbut" type="submit">Register</button>
+            </form>
+            <input type="file" id="existingFileInput" accept=".xlsx,.xls" style="display:none;">
+        </div>
+        <div id="alertBox" class="alert-box hidden">
+            <div class="loader"></div>
+            <span class="close-alert">&times;</span>
+            <p>Registration Completed<span id="countdown"></span> </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rural Banking Cloud. All rights reserved.</p>
+    </footer>
+    <script>
+        const timeLimit = 5;
+        let alertBox = document.getElementById('alertBox');
+        let closeButton = document.getElementsByClassName('close-alert')[0];
+        let countdown = document.getElementById('countdown');
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Get form data
+            const formData = new FormData(document.getElementById('registerForm'));
+            const formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
+            });
+
+            // Trigger file input click to select the existing file
+            document.getElementById('existingFileInput').click();
+
+            document.getElementById('existingFileInput').onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const data = new Uint8Array(event.target.result);
+                        appendToExistingWorkbook(data, formDataObj);
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    createNewWorkbook(formDataObj);
+                }
+            };
+        }
+
+        function createNewWorkbook(formDataObj) {
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.json_to_sheet([formDataObj], { header: Object.keys(formDataObj) });
+            XLSX.utils.book_append_sheet(wb, ws, 'Registration Details');
+            XLSX.writeFile(wb, 'updated_registration_details.xlsx');
+            showAlert();
+        }
+
+        function appendToExistingWorkbook(fileArrayBuffer, formDataObj) {
+            const workbook = XLSX.read(fileArrayBuffer, { type: 'array' });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const newData = XLSX.utils.sheet_to_json(worksheet);
+            newData.push(formDataObj);
+            const newWs = XLSX.utils.json_to_sheet(newData);
+            workbook.Sheets[workbook.SheetNames[0]] = newWs;
+            XLSX.writeFile(workbook, 'updated_registration_details.xlsx');
+            showAlert();
+        }
+
+        function showAlert() {
+            alertBox.classList.remove('hidden');
+            setTimeout(hideAlert, timeLimit * 1000);
+        }
+
+        function hideAlert() {
+            alertBox.classList.add('hidden');
+        }
+
+        closeButton.onclick = function () {
+            alertBox.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

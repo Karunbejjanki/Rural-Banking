@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Rural Banking Cloud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+            img{
+                width: 250px;
+            }
+            .div{
+                p{
+                    font-size: 22px;
+                    opacity: .7;
+                }
+            }
+        }
+        .logout-link {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 20px;
+        }
+        .welcome {
+            text-align: center;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .feature {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 300px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="bank.jpeg" alt="">
+        <div class="div">
+        <h1>Rural Banking Cloud</h1>
+        <p>Welcome, <span id="user-name"></span>!</p>
+        <a class="logout-link" href="htmlb.html">Logout</a>
+    </div>
+    </header>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="loans.html">Loans</a>
+        <a href="support.html">Support</a>
+    </nav>
+    
+    <div class="container">
+        <section class="welcome">
+            <h2>Welcome to Your Dashboard</h2>
+            <p>Here you can manage all your banking activities conveniently.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <h3>Account Summary</h3>
+                <p>View your account balance and recent transactions.</p>
+            </div>
+            <div class="feature">
+                <h3>Make a Transfer</h3>
+                <p>Transfer money to other accounts easily and securely.</p>
+            </div>
+            <div class="feature">
+                <h3>Apply for a Loan</h3>
+                <p>Get financial assistance tailored to your needs.</p>
+            </div>
+            <div class="feature">
+                <h3>Customer Support</h3>
+                <p>Get help with any banking-related issues 24/7.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rural Banking Cloud. All rights reserved.</p>
+    </footer>
+    
+
+    <script>
+        // Assuming user's first name is stored in local storage
+        document.getElementById('user-name').innerText = localStorage.getItem('firstName') || 'User';
+    </script>
+</body>
+</html>
